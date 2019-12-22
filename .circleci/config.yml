@@ -47,8 +47,6 @@ jobs:
           to: 's3://mod4-project-frontend'
           arguments: |
             --acl public-read \
-            --exclude \".git/*\" \             
-            --exclude \".gitignore\" \
           overwrite: true
 
 
