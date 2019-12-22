@@ -1,0 +1,57 @@
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.4
+jobs:
+  build-and-deploy:
+    docker:
+      - image: circleci/node:10
+
+    working_directory: ~/repo #local ci working directory name
+
+    environment:
+      AWS_REGION: eu-west-2
+
+    steps:
+      # checkout code from repo
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      #  Install Dependencies
+      - run:
+          name: Install dependencies with Yarn
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # Buil react app
+      - run: 
+          name: Build react app for deploying
+          command: yarn run build
+
+      # uplaod to S3 bucket
+      - aws-s3/sync:
+          from: ~/repo/build/                   # local ci folder with built code
+          to: 's3://mod4-brandifai-frontend'    # target bucket
+          arguments: |
+            --acl public-read \
+            --exclude \".git/*\" \             
+            --exclude \".gitignore\" \
+          overwrite: true
+
+workflows:
+  version: 2.1
+  workflow:
+    jobs:
+    - build-and-deploy:        
+        filters:
+          branches:
+            only: master    # set so only changes to master will be deployed
