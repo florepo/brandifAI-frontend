@@ -31,24 +31,23 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+        
+      # Buil app
+      - run: yarn run build
 
-      # Buil react app
-      - run: 
-          name: Build react app for deploying
-          command: yarn run build
-
-      # uplaod to S3 bucket
       - aws-s3/sync:
-          from: ~/repo/build/                   # local ci folder with built code
-          to: 's3://mod4-brandifai-frontend'    # target bucket
+          from: ~/repo/build/
+          to: 's3://mod4-brandifai-frontend'
           arguments: |
             --acl public-read \
             --exclude \".git/*\" \             
             --exclude \".gitignore\" \
           overwrite: true
 
+
+
 workflows:
-  version: 2.1
+  version: 2.0
   workflow:
     jobs:
     - build-and-deploy:        
