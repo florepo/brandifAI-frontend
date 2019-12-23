@@ -3,13 +3,24 @@ import { Image, Item } from "semantic-ui-react";
 
 const DetailsCard = props => {
   const { selectedImage, deselectImage } = props;
+
+  //catching lack of model attribute when no concepts linked
+  let model = [];
+  if (selectedImage.image_details[0]) {
+    model = selectedImage.image_details[0].model;
+  }
+
   return (
     <Item>
       <Item.Image size="tiny" src={selectedImage.image_url} />
       <Item.Content>
-        <Item.Header as="a">Header</Item.Header>
-        <Item.Meta>Description</Item.Meta>
+        <Item.Header as="a">Model: {model}</Item.Header>
         <Item.Description>
+          {selectedImage.image_details.map(detail => (
+            <div key={detail.tag}>
+              {detail.tag} - {detail.value}
+            </div>
+          ))}
         </Item.Description>
         <Item.Extra>
           <button onClick={deselectImage}>GO BACK</button>
