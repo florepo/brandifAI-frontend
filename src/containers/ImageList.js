@@ -1,14 +1,14 @@
 import React from "react";
 import { Image } from "semantic-ui-react";
 
-const ImageList = ({ selectedProfile, toggleDisplay }) => {
+const ImageList = ({ selectedProfile, selectImage }) => {
   return (
     <Image.Group size="small">
       {selectedProfile.images.map((image, index) => (
         <React.Fragment key={index}>
           <Image
             key={index}
-            onClick={toggleDisplay}
+            onClick={() => selectImage(image)}
             src={image.image_url}
           />
           {/* <Divider hidden /> */}
@@ -18,4 +18,4 @@ const ImageList = ({ selectedProfile, toggleDisplay }) => {
   );
 };
 
-export default ImageList
+export default ImageList;

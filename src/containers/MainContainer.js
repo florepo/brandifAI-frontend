@@ -26,7 +26,7 @@ class MainContainer extends Component {
     this.state = {
       profiles: [],
       selectedProfile: null,
-      toggleDisplayofDetails: false
+      selectedImage: null
     };
   }
 
@@ -38,15 +38,17 @@ class MainContainer extends Component {
 
   //Helpers
 
-  toggleDisplay = () => {
-    console.log("clicked");
-    this.setState({
-      toggleDisplayofDetails: !this.state.toggleDisplayofDetails
-    });
+  selectImage = image => {
+    this.setState({ selectedImage: image });
   };
 
+  deselectImage = () => {
+    this.setState({ selectedImage: null });
+
+  }
+
   selectProfile = selectedProfile => {
-    this.setState({ selectedProfile, toggleDisplayofDetails: false })
+    this.setState({ selectedProfile, selectedImage: null });
   };
 
   deselectProfile = () => {
@@ -56,8 +58,8 @@ class MainContainer extends Component {
   //Render
 
   render() {
-    const { profiles, selectedProfile, toggleDisplayofDetails } = this.state;
-    const { selectProfile, deselectProfile, toggleDisplay } = this;
+    const { profiles, selectedProfile, selectedImage } = this.state;
+    const { selectProfile, deselectProfile, selectImage, deselectImage } = this;
     return (
       <React.Fragment>
         <div>
@@ -72,7 +74,12 @@ class MainContainer extends Component {
           {selectedProfile ? (
             <React.Fragment>
               <br></br>
-              <ImageContainer toggleDisplayofDetails={toggleDisplayofDetails} toggleDisplay={toggleDisplay} selectedProfile={selectedProfile} />
+              <ImageContainer
+                selectedImage={selectedImage}
+                selectImage={selectImage}
+                deselectImage={deselectImage}
+                selectedProfile={selectedProfile}
+              />
             </React.Fragment>
           ) : null}
         </div>

@@ -3,18 +3,19 @@ import DetailsCard from "../components/DetailsCard";
 import ImageList from "./ImageList";
 
 class ImageContainer extends Component {
-
   //////////////// ADD UNIQUE KEY
 
   render() {
-    const { selectedProfile, toggleDisplay, toggleDisplayofDetails } = this.props;
-    return toggleDisplayofDetails ? (
-      <DetailsCard toggleDisplay={toggleDisplay}/>
-    ) : (
-      <ImageList
-        toggleDisplay={toggleDisplay}
+    const { selectedProfile, selectImage, selectedImage, deselectImage } = this.props;
+    return selectedImage ? (
+      <DetailsCard
         selectedProfile={selectedProfile}
+        selectImage={selectImage}
+        selectedImage={selectedImage}
+        deselectImage={deselectImage}
       />
+    ) : (
+      <ImageList selectImage={selectImage} selectedProfile={selectedProfile} />
     );
   }
 }
