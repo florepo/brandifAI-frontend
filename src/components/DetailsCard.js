@@ -14,7 +14,7 @@ const DetailsCard = props => {
           <Image src="/images/wireframe/short-paragraph.png" />
         </Item.Description>
         <Item.Extra>
-          <button onClick={toggleDisplay}>GO BACK</button>
+          <button onClick={props.toggleDisplay}>GO BACK</button>
         </Item.Extra>
       </Item.Content>
     </Item>
