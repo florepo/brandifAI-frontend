@@ -6,14 +6,23 @@ class ImageContainer extends Component {
   //////////////// ADD UNIQUE KEY
 
   render() {
-    const { selectedProfile, selectImage, selectedImage, deselectImage } = this.props;
+    const {
+      selectedProfile,
+      selectImage,
+      selectedImage,
+      deselectImage
+    } = this.props;
     return selectedImage ? (
-      <DetailsCard
-        selectedProfile={selectedProfile}
-        selectImage={selectImage}
-        selectedImage={selectedImage}
-        deselectImage={deselectImage}
-      />
+      <div className="ui centered grid">
+        <div className="eight wide column" >
+          <DetailsCard
+            selectedProfile={selectedProfile}
+            selectImage={selectImage}
+            selectedImage={selectedImage}
+            deselectImage={deselectImage}
+          />
+        </div>
+      </div>
     ) : (
       <ImageList selectImage={selectImage} selectedProfile={selectedProfile} />
     );

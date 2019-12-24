@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProfileList from "../components/ProfileList";
+import ProfileList from "./ProfileList";
 import ImageContainer from "./ImageContainer";
 
 //API
@@ -44,8 +44,7 @@ class MainContainer extends Component {
 
   deselectImage = () => {
     this.setState({ selectedImage: null });
-
-  }
+  };
 
   selectProfile = selectedProfile => {
     this.setState({ selectedProfile, selectedImage: null });
@@ -62,15 +61,13 @@ class MainContainer extends Component {
     const { selectProfile, deselectProfile, selectImage, deselectImage } = this;
     return (
       <React.Fragment>
-        <div>
-          <ProfileList
-            selectProfile={selectProfile}
-            deselectProfile={deselectProfile}
-            profiles={profiles}
-            selectedProfile={selectedProfile}
-          />
-        </div>
-        <div>
+        <ProfileList
+          selectProfile={selectProfile}
+          deselectProfile={deselectProfile}
+          profiles={profiles}
+          selectedProfile={selectedProfile}
+        />
+        <div style={{ backgroundColor: "#F2F2F2", padding: "10px" }}>
           {selectedProfile ? (
             <React.Fragment>
               <br></br>

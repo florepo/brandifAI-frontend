@@ -3,14 +3,15 @@ import { Image } from "semantic-ui-react";
 
 const ProfileIcon = ({ profile, clickHandler }) => {
   return (
-    <React.Fragment>
+    <div style={{ display: "inline-block" }}>
+      <div>{profile.username + " "}</div>
       <Image
         onClick={() => clickHandler(profile)}
         src={profile.icon_url}
         avatar
+        size="tiny"
       />
-      <span>{profile.username + " "}</span>
-    </React.Fragment>
+    </div>
   );
 };
 

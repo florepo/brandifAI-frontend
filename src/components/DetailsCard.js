@@ -11,8 +11,15 @@ const DetailsCard = props => {
   }
 
   return (
-    <Item>
-      <Item.Image size="tiny" src={selectedImage.image_url} />
+    <Item
+      style={{
+        borderRadius: "10px",
+        backgroundColor: "#FFFFFF",
+        border: "1px solid grey",
+        padding: "30px"
+      }}
+    >
+      <Item.Image size="small" src={selectedImage.image_url} />
       <Item.Content>
         <Item.Header as="a">Model: {model}</Item.Header>
         <Item.Description>
