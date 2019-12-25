@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "semantic-ui-react";
+import { Input, Button, Message, Icon } from "semantic-ui-react";
 
 //API
 
@@ -8,9 +8,14 @@ const API = "https://www.instagram.com/";
 //Class
 
 class SearchBox extends React.Component {
-  state = {
-    searchInput: ""
-  };
+  constructor() {
+    super();
+    this.state = {
+      searchInput: "",
+      invalidSearch: false,
+      errorContent: ""
+    };
+  }
 
   //Helpers
 
@@ -20,14 +25,23 @@ class SearchBox extends React.Component {
   };
 
   getProfile = () => {
-    fetch(API + this.state.searchInput)
+    const { searchInput, errorContent } = this.state;
+    fetch(API + searchInput)
       .then(resp => resp.status)
       .then(status => {
         if (status === 404) {
-          alert('Instagram username does not exist');
+          this.setState({
+            invalidSearch: true,
+            errorContent: "Instagram username does not exist"
+          });
+        } else if (searchInput === "") {
+          this.setState({
+            invalidSearch: true,
+            errorContent: "The text field cannot be empty!"
+          });
         } else {
-          console.log("success")
-          this.setState({selectedProfile: this.state.searchInput})
+          console.log("success"); //////////// ADD FUNCTION FOR NEW MODAL TO CONFIRM
+          this.setState({ selectedProfile: searchInput, invalidSearch: false });
         }
       });
   };
@@ -38,19 +52,27 @@ class SearchBox extends React.Component {
   };
 
   render() {
-    const { searchInput } = this.state;
+    const { searchInput, invalidSearch, errorContent } = this.state;
     const { handleChange, handleSubmit } = this;
 
     return (
-      <form onSubmit={handleSubmit} style={{ padding: "10px" }}>
-        <Input
-          style={{ display: "inline" }}
-          placeholder="Instagram Profile Name"
-          onChange={handleChange}
-          value={searchInput}
-        />
-        <input type="submit" />
-      </form>
+      <React.Fragment>
+        <form onSubmit={handleSubmit} style={{ padding: "10px" }}>
+          <Input
+            iconPosition="left"
+            error={invalidSearch}
+            style={{ display: "inline" }}
+            placeholder="Instagram Profile Name"
+            onChange={handleChange}
+            value={searchInput}
+          >
+            <Icon name="at" />
+            <input />
+          </Input>
+          <Button type="submit">Submit</Button>
+        </form>
+        {invalidSearch ? <Message error>{errorContent}</Message> : null}
+      </React.Fragment>
     );
   }
 }
