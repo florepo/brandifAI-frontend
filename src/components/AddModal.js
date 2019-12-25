@@ -11,7 +11,7 @@ const AddModal = () => (
     }
     header="Reminder!"
     content={<SearchBox/>}
-    actions={[{ key: "done", content: "Done", positive: true }]}
+    actions={[{ key: "done", content: "back", negative: true }]}
   />
 );
 
