@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Item } from "semantic-ui-react";
+import { Button, Item } from "semantic-ui-react";
 
 const DetailsCard = props => {
   const { selectedImage, deselectImage } = props;
@@ -21,8 +21,8 @@ const DetailsCard = props => {
     >
       <Item.Image size="small" src={selectedImage.image_url} />
       <Item.Content>
-        <Item.Header as="a">Model: {model}</Item.Header>
-        <Item.Description>
+        <Item.Header style={{fontSize: "25px"}} as="a">Model: {model}</Item.Header>
+        <Item.Description style={{fontSize: "15px"}}>
           {selectedImage.image_details.map(detail => (
             <div key={detail.tag}>
               {detail.tag} - {detail.value}
@@ -30,7 +30,7 @@ const DetailsCard = props => {
           ))}
         </Item.Description>
         <Item.Extra>
-          <button onClick={deselectImage}>GO BACK</button>
+          <Button negative onClick={deselectImage}>GO BACK</Button>
         </Item.Extra>
       </Item.Content>
     </Item>

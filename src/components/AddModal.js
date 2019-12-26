@@ -9,7 +9,7 @@ const AddModal = () => (
         <i className="icon plus"></i>
       </button>
     }
-    header="Reminder!"
+    header="Enter the username of the profile you would like to analyze"
     content={<SearchBox/>}
     actions={[{ key: "done", content: "back", negative: true }]}
   />

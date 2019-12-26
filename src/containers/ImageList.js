@@ -7,6 +7,7 @@ const ImageList = ({ selectedProfile, selectImage }) => {
       {selectedProfile.images.map((image, index) => (
         <React.Fragment key={index}>
           <Image
+            fluid
             key={index}
             onClick={() => selectImage(image)}
             src={image.image_url}
