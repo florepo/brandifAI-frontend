@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Button, Message, Icon } from "semantic-ui-react";
+import { Input, Button, Message, Icon, Modal } from "semantic-ui-react";
 
 //API
 
@@ -13,7 +13,8 @@ class SearchBox extends React.Component {
     this.state = {
       searchInput: "",
       invalidSearch: false,
-      errorContent: ""
+      errorContent: "",
+      confirmationModalOpen: false
     };
   }
 
@@ -23,6 +24,17 @@ class SearchBox extends React.Component {
     let searchInput = e.target.value;
     this.setState({ searchInput });
   };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.getProfile();
+  };
+
+  handleSecondModalClose = () => {
+    this.setState({ confirmationModalOpen: false });
+  };
+
+  // Check if profile is real and activate confirmation modal
 
   getProfile = () => {
     const { searchInput, errorContent } = this.state;
@@ -40,16 +52,33 @@ class SearchBox extends React.Component {
             errorContent: "The text field cannot be empty!"
           });
         } else {
-          console.log("success"); //////////// ADD FUNCTION FOR NEW MODAL TO CONFIRM
-          this.setState({ selectedProfile: searchInput, invalidSearch: false });
+          console.log("success"); 
+          this.setState({
+            selectedProfile: searchInput,
+            invalidSearch: false,
+            confirmationModalOpen: true
+          });
         }
       });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.getProfile();
-  };
+  // JSX for confirmation modal
+
+  get confirmationModal() {
+    return (
+      <Modal
+        basic
+        centered={false}
+        open={this.state.confirmationModalOpen}
+        onClose={this.handleSecondModalClose}
+        header="Is this the correct instagram profile?"
+        content="[put profile from front end scrape here]" 
+        actions={[{ key: "done", content: "Done", positive: true }]}
+      />
+    );
+  }
+
+  // Render
 
   render() {
     const { searchInput, invalidSearch, errorContent } = this.state;
@@ -72,6 +101,7 @@ class SearchBox extends React.Component {
           <Button type="submit">Submit</Button>
         </form>
         {invalidSearch ? <Message error>{errorContent}</Message> : null}
+        {this.confirmationModal}
       </React.Fragment>
     );
   }

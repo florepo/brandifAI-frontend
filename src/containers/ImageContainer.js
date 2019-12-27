@@ -3,7 +3,6 @@ import DetailsCard from "../components/DetailsCard";
 import ImageList from "./ImageList";
 
 class ImageContainer extends Component {
-  //////////////// ADD UNIQUE KEY
 
   render() {
     const {
@@ -14,7 +13,7 @@ class ImageContainer extends Component {
     } = this.props;
     return selectedImage ? (
       <div className="ui centered grid">
-        <div className="eight wide column" >
+        <div className="eleven wide column" >
           <DetailsCard
             selectedProfile={selectedProfile}
             selectImage={selectImage}
