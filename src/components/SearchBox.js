@@ -27,7 +27,7 @@ class SearchBox extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.getProfile();
+    this.checkProfile();
   };
 
   handleSecondModalClose = () => {
@@ -36,8 +36,8 @@ class SearchBox extends React.Component {
 
   // Check if profile is real and activate confirmation modal
 
-  getProfile = () => {
-    const { searchInput, errorContent } = this.state;
+  checkProfile = () => {
+    const { searchInput } = this.state;
     fetch(API + searchInput)
       .then(resp => resp.status)
       .then(status => {
@@ -52,7 +52,7 @@ class SearchBox extends React.Component {
             errorContent: "The text field cannot be empty!"
           });
         } else {
-          console.log("success"); 
+          console.log("success");
           this.setState({
             selectedProfile: searchInput,
             invalidSearch: false,
@@ -62,7 +62,7 @@ class SearchBox extends React.Component {
       });
   };
 
-  // JSX for confirmation modal
+  // JSX for render
 
   get confirmationModal() {
     return (
@@ -72,15 +72,13 @@ class SearchBox extends React.Component {
         open={this.state.confirmationModalOpen}
         onClose={this.handleSecondModalClose}
         header="Is this the correct instagram profile?"
-        content="[put profile from front end scrape here]" 
+        content="[put profile from front end scrape here]"
         actions={[{ key: "done", content: "Done", positive: true }]}
       />
     );
   }
 
-  // Render
-
-  render() {
+  get form() {
     const { searchInput, invalidSearch, errorContent } = this.state;
     const { handleChange, handleSubmit } = this;
 
@@ -101,6 +99,19 @@ class SearchBox extends React.Component {
           <Button type="submit">Submit</Button>
         </form>
         {invalidSearch ? <Message error>{errorContent}</Message> : null}
+      </React.Fragment>
+    );
+  }
+
+  // Render
+
+  render() {
+    const { searchInput, invalidSearch, errorContent } = this.state;
+    const { handleChange, handleSubmit } = this;
+
+    return (
+      <React.Fragment>
+        {this.form}
         {this.confirmationModal}
       </React.Fragment>
     );
