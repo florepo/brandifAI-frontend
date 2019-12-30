@@ -12,13 +12,16 @@ const ProfileList = ({
     <div className="backdrop">
       <p>Instagram Profiles Analyzed: </p>
         {profiles.map(profile =>
-          profile === selectedProfile ? (
+          profile === selectedProfile ?
+          (
             <ProfileIcon
               key={profile.id}
               clickHandler={deselectProfile}
               profile={profile}
             />
-          ) : (
+          )
+          :
+          (
             <ProfileIcon
               key={profile.id}
               clickHandler={selectProfile}

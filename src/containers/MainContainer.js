@@ -71,10 +71,12 @@ export class MainContainer extends Component {
           deselectProfile={deselectProfile}
           profiles={profiles}
           selectedProfile={selectedProfile}
+          // hadn down funciton here
         />
         <div style={{ backgroundColor: "#F2F2F2", padding: "10px" }}>
-          {selectedProfile ? (
-            <React.Fragment>
+          {selectedProfile
+          ?
+          ( <React.Fragment>
               <br></br>
               <ImageContainer
                 selectedImage={selectedImage}
@@ -83,7 +85,9 @@ export class MainContainer extends Component {
                 selectedProfile={selectedProfile}
               />
             </React.Fragment>
-          ) : null}
+          )
+          :
+          null}
         </div>
       </React.Fragment>
     );
