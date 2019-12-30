@@ -73,7 +73,8 @@ class SearchBox extends React.Component {
 
   postNewProfile = e => {
     e.preventDefault();
-    console.log("hi");
+    console.log("posyNewProfile");
+
     const data = this.state.searchInput;
 
     const configObj = {
