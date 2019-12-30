@@ -4,7 +4,7 @@ import ImageContainer from "./ImageContainer";
 
 //API
 
-const API = "http://localhost:3000/profiles/";
+export const API = "http://localhost:3000/profiles/";
 
 //Initial Fetch
 
@@ -20,7 +20,7 @@ const getProfilesFromAPI = parent => {
 
 // Class
 
-class MainContainer extends Component {
+export class MainContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -89,5 +89,3 @@ class MainContainer extends Component {
     );
   }
 }
-
-export default MainContainer;

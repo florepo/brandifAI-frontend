@@ -1,9 +1,11 @@
 import React from "react";
+import PostForm from "./PostForm";
+import { API } from "../containers/MainContainer";
 import { Input, Button, Message, Icon, Modal } from "semantic-ui-react";
 
 //API
 
-const API = "https://www.instagram.com/";
+const INSTA_API = "https://www.instagram.com/";
 
 //Class
 
@@ -47,7 +49,7 @@ class SearchBox extends React.Component {
         errorContent: "The text field cannot be empty!"
       });
     } else {
-      fetch(API + searchInput)
+      fetch(INSTA_API + searchInput)
         .then(resp => resp.status)
         .then(status => {
           if (status === 404) {
@@ -67,6 +69,27 @@ class SearchBox extends React.Component {
     }
   };
 
+  // Add new profile to backend with post
+
+  postNewProfile = e => {
+    e.preventDefault();
+    console.log("hi");
+    const data = this.state.searchInput;
+
+    const configObj = {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch(API, configObj)
+      .then(resp => resp.json())
+      .then(console.log);
+  };
+
   // JSX for render
 
   get confirmationModal() {
@@ -77,7 +100,7 @@ class SearchBox extends React.Component {
         open={this.state.confirmationModalOpen}
         onClose={this.handleSecondModalClose}
         header="Is this the correct instagram profile?"
-        content="[put profile from front end scrape here]"
+        content={<PostForm handleSubmit={this.postNewProfile} />}
         actions={[{ key: "done", content: "Done", positive: true }]}
       />
     );
