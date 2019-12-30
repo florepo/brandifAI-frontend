@@ -10,12 +10,10 @@ jobs:
 
     environment:
       AWS_REGION: eu-west-2
-
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
-
 
     steps:
       - checkout
@@ -27,7 +25,7 @@ jobs:
             - v1-dependencies-
 
       #  Install Dependencies
-     
+
       - run:
           name: Install dependencies with NPM
           command: yarn install # replace with `yarn install` if using yarn
@@ -38,24 +36,20 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # Buil app
-      - run: yarn run build
-
-
+      - run: CI=false yarn run build
 
       - aws-s3/sync:
           from: ~/repo/build/
-          to: 's3://mod4-brandifai-frontend'
+          to: "s3://mod4-brandifai-frontend"
           arguments: |
             --acl public-read \
           overwrite: true
-
-
 
 workflows:
   version: 2.0
   workflow:
     jobs:
-    - build-and-deploy:        
-        filters:
-          branches:
-            only: master    # set so only changes to master will be deployed
+      - build-and-deploy:
+          filters:
+            branches:
+              only: master # set so only changes to master will be deployed
