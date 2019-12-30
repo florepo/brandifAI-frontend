@@ -38,28 +38,33 @@ class SearchBox extends React.Component {
 
   checkProfile = () => {
     const { searchInput } = this.state;
-    fetch(API + searchInput)
-      .then(resp => resp.status)
-      .then(status => {
-        if (status === 404) {
-          this.setState({
-            invalidSearch: true,
-            errorContent: "Instagram username does not exist"
-          });
-        } else if (searchInput === "") {
-          this.setState({
-            invalidSearch: true,
-            errorContent: "The text field cannot be empty!"
-          });
-        } else {
-          console.log("success");
-          this.setState({
-            selectedProfile: searchInput,
-            invalidSearch: false,
-            confirmationModalOpen: true
-          });
-        }
+
+    ///add confirmation fgor instagram site down with fetch to base api url
+
+    if (searchInput === "") {
+      this.setState({
+        invalidSearch: true,
+        errorContent: "The text field cannot be empty!"
       });
+    } else {
+      fetch(API + searchInput)
+        .then(resp => resp.status)
+        .then(status => {
+          if (status === 404) {
+            this.setState({
+              invalidSearch: true,
+              errorContent: "Instagram username does not exist"
+            });
+          } else {
+            console.log("success");
+            this.setState({
+              selectedProfile: searchInput,
+              invalidSearch: false,
+              confirmationModalOpen: true
+            });
+          }
+        });
+    }
   };
 
   // JSX for render
@@ -106,9 +111,6 @@ class SearchBox extends React.Component {
   // Render
 
   render() {
-    const { searchInput, invalidSearch, errorContent } = this.state;
-    const { handleChange, handleSubmit } = this;
-
     return (
       <React.Fragment>
         {this.form}
