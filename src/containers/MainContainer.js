@@ -4,7 +4,7 @@ import ImageContainer from "./ImageContainer";
 
 //API
 
-const API = "http://localhost:3000/profiles";
+const API = "http://localhost:3000/profiles/";
 
 //Initial Fetch
 
@@ -47,7 +47,12 @@ class MainContainer extends Component {
   };
 
   selectProfile = selectedProfile => {
-    this.setState({ selectedProfile, selectedImage: null });
+    const id = selectedProfile.id;
+    fetch(API + id)
+      .then(resp => resp.json())
+      .then(profile =>
+        this.setState({ selectedProfile: profile, selectedImage: null })
+      );
   };
 
   deselectProfile = () => {
