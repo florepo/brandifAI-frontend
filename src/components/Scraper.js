@@ -14,14 +14,14 @@ Request(API, (error, response, body)=>{
     // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
     // console.log('body:', body); // Print the HTML for the Google homepage.
     const $ = Cheerio.load(body)
-    const result = $('meta[property=og:image]')
+    const result = $('meta[property="og:image"]')
     // const result = result1("og:image")
     //  'meta property="og:image"..</meta>')
     
     // const result = $.root().html()
-
     console.log(result)
-
+    console.log(result[0].attribs.content)
+    // 
   })
   
 
