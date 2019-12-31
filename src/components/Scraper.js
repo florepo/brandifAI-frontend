@@ -1,50 +1,83 @@
 import React, { Component } from 'react';
 import Cheerio from "cheerio"
-import Request from "request"
-import { handleRef } from '@stardust-ui/react-component-ref';
+import {Image} from "semantic-ui-react"
 
-const API = "https://www.instagram.com/barackobama/?hl=en"
+// const Scrape = (props) => {
 
-const scrape = ()=> {
-console.log("scrape")
+//     const url = `https://www.instagram.com/${props.profileName}?hl=en`
 
+//         const profileImgUrl = Request(url, (error, response, body) => {
+//             // console.log('error:', error); // Print the error if one occurred
+//             // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+//             // console.log('body:', body); // Print the HTML for the Google homepage.
+//             // catch errors???
 
-Request(API, (error, response, body)=>{
-    // console.log('error:', error); // Print the error if one occurred
-    // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    // console.log('body:', body); // Print the HTML for the Google homepage.
-    const $ = Cheerio.load(body)
-    const result = $('meta[property="og:image"]')
-    // const result = result1("og:image")
-    //  'meta property="og:image"..</meta>')
-    
-    // const result = $.root().html()
-    console.log(result)
-    console.log(result[0].attribs.content)
-    // 
-  })
+//             const $ = Cheerio.load(body)
+//             const result = $('meta[property="og:image"]')
+//             console.log(url)
+//             console.log('-')
+//             console.log(result)
+//             console.log('--')
+//             console.log(result[0].attribs.content)
+//             return result[0].attribs.content
+            
+//         })
   
+//     return (
+//        <img />
+//     )
+// }
 
-}
+// export default Scrape
 
-const handleClick = (e) =>{
-    console.log("clicked")
-    scrape()
-}
-
-class Scraper extends Component {
+class Scrape extends Component {
     constructor(props) {
         super(props);
+        this.image = React.createRef()
         this.state = {  }
     }
-    render() { 
 
-        return (  
-            <button onClick={(event)=> handleClick(event)} >
-                Scrape
-            </button>
-        );
+    url = `https://www.instagram.com/${this.props.profileName}?hl=en`
+
+    profileImgUrl = () => fetch(this.url)
+        .then(res => res.text())
+        .then(body => {
+                const $ = Cheerio.load(body)
+                const result = $('meta[property="og:image"]')
+                return result[0].attribs.content
+        })
+
+
+    // profileImgUrl = () => new Promise((resolve, reject) => {
+    //     Request(this.url, (error, response, body) => {
+    //         if (error) return reject(error)
+    //         // console.log('error:', error); // Print the error if one occurred
+    //         // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    //         // console.log('body:', body); // Print the HTML for the Google homepage.
+    //         // catch errors???
+    
+    //         const $ = Cheerio.load(body)
+    //         const result = $('meta[property="og:image"]')
+    
+    
+    //         console.log("the actual result",result[0].attribs.content)
+    //         resolve(result[0].attribs.content)
+            
+    //     })
+    // })
+
+    componentDidMount() {
+        this.profileImgUrl()
+            .then(src => {
+                this.image.current.src = src
+            })
+    }
+
+    render() { 
+        return (
+           <img  style={{borderRadius: "50%"}} ref={this.image}/>
+         );
     }
 }
  
-export default Scraper;
+export default Scrape;

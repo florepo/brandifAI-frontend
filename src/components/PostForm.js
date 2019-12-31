@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button} from "semantic-ui-react"
-
+import {Button, Grid} from "semantic-ui-react"
+import Scrape from "../components/Scraper"
 
 
 const PostForm = props => {
@@ -11,10 +11,14 @@ const PostForm = props => {
     props.handleSubmit(event)
   }
 
+
   return (
     <form onSubmit={event => handleSubmit(event)}>
-      <p>[frontend scraped image of profile fron insta]</p>
+    <div >
+      <Scrape profileName={props.profileName} />
+      <br></br>
       <Button type="submit"> Yes </Button>
+    </div>
     </form>
   )
 }

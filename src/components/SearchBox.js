@@ -87,7 +87,7 @@ class SearchBox extends React.Component {
 
     fetch(API, configObj)
       .then(resp => resp.json())
-      .then(console.log);
+      // .then(console.log);
   };
 
   // JSX for render
@@ -100,7 +100,7 @@ class SearchBox extends React.Component {
         open={this.state.confirmationModalOpen}
         onClose={this.handleSecondModalClose}
         header="Is this the correct instagram profile?"
-        content={<PostForm handleSubmit={this.postNewProfile} />}
+        content={<PostForm handleSubmit={this.postNewProfile} profileName={this.state.searchInput}/>}
         actions={[{ key: "done", content: "Done", positive: true }]}
       />
     );
