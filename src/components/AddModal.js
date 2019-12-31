@@ -10,7 +10,7 @@ const AddModal = (props) => (
       </button>
     }
     header="Enter the username of the profile you would like to analyze"
-    content={<SearchBox handleConfirm={props.handleConfirm}/>}
+    content={<SearchBox setPatchID={props.setPatchID} handleConfirm={props.handleConfirm} patchProfile={props.patchProfile}/>}
     actions={[{ key: "done", content: "back", negative: true }]}
   />
 );

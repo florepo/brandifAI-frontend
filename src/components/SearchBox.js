@@ -1,6 +1,6 @@
 import React from "react";
 import PostForm from "./PostForm";
-import { API } from "../containers/MainContainer";
+import { API } from "../adapters/api";
 import { Input, Button, Message, Icon, Modal } from "semantic-ui-react";
 
 //API
@@ -87,7 +87,8 @@ class SearchBox extends React.Component {
 
     fetch(API, configObj)
       .then(resp => resp.json())
-      // .then(console.log);
+      .then(console.log)
+      // .then(json => this.props.setPatchID(json.id))
   };
 
   // JSX for render
@@ -100,7 +101,7 @@ class SearchBox extends React.Component {
         open={this.state.confirmationModalOpen}
         onClose={this.handleSecondModalClose}
         header="Is this the correct instagram profile?"
-        content={<PostForm handleConfirm={this.props.handleConfirm} handleSubmit={this.postNewProfile} profileName={this.state.searchInput}/>}
+        content={<PostForm patchProfile={this.props.patchProfile} handleConfirm={this.props.handleConfirm} handleSubmit={this.postNewProfile} profileName={this.state.searchInput}/>}
         actions={[{ key: "done", content: "Done", positive: true }]}
       />
     );

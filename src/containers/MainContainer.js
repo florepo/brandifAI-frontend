@@ -1,22 +1,7 @@
 import React, { Component } from "react";
 import ProfileList from "./ProfileList";
 import ImageContainer from "./ImageContainer";
-
-//API
-
-export const API = "http://localhost:3000/profiles/";
-
-//Initial Fetch
-
-const getProfilesFromAPI = parent => {
-  fetch(API)
-    .then(resp => resp.json())
-    .then(json =>
-      parent.setState({
-        profiles: json
-      })
-    );
-};
+import { API } from "../adapters/api";
 
 // Class
 
@@ -27,17 +12,52 @@ export class MainContainer extends Component {
       profiles: [],
       selectedProfile: null,
       selectedImage: null,
-      profileImgUrl: null
+      profileImgUrl: null,
+      patchID: null
     };
   }
+
+  //Initial Fetch
+
+  getProfilesFromAPI = () => {
+    fetch(API)
+      .then(resp => resp.json())
+      .then(json =>
+        this.setState({
+          profiles: json
+        })
+      );
+  };
 
   // Initial Render
 
   componentDidMount() {
-    getProfilesFromAPI(this);
+    this.getProfilesFromAPI();
   }
 
   //Helpers
+
+  setPatchID = id => {
+    console.log(id)
+    // this.setState({
+    //   patchID: id
+    // });
+  };
+
+  patchProfile = () => {
+    // const data = this.state.profileImgUrl;
+
+    // const configObj = {
+    //   method: "PATCH",
+    //   headers: {
+    //     "content-type": "application/json",
+    //     accept: "application/json"
+    //   },
+    //   body: JSON.stringify(data)
+    // };
+
+    // fetch(API, configObj);
+  };
 
   selectImage = image => {
     this.setState({ selectedImage: image });
@@ -60,7 +80,7 @@ export class MainContainer extends Component {
     this.setState({ selectedProfile: null });
   };
 
-  handleConfirm = (image_url) => {
+  handleConfirm = image_url => {
     console.log("click");
     this.setState({ profileImgUrl: image_url });
   };
@@ -69,10 +89,20 @@ export class MainContainer extends Component {
 
   render() {
     const { profiles, selectedProfile, selectedImage } = this.state;
-    const { selectProfile, deselectProfile, selectImage, deselectImage, handleConfirm } = this;
+    const {
+      selectProfile,
+      deselectProfile,
+      selectImage,
+      deselectImage,
+      handleConfirm,
+      patchProfile,
+      setPatchID
+    } = this;
     return (
       <React.Fragment>
         <ProfileList
+          setPatchID={setPatchID}
+          patchProfile={patchProfile}
           selectProfile={selectProfile}
           deselectProfile={deselectProfile}
           profiles={profiles}
@@ -81,9 +111,8 @@ export class MainContainer extends Component {
           // hadn down funciton here
         />
         <div style={{ backgroundColor: "#F2F2F2", padding: "10px" }}>
-          {selectedProfile
-          ?
-          ( <React.Fragment>
+          {selectedProfile ? (
+            <React.Fragment>
               <br></br>
               <ImageContainer
                 selectedImage={selectedImage}
@@ -92,9 +121,7 @@ export class MainContainer extends Component {
                 selectedProfile={selectedProfile}
               />
             </React.Fragment>
-          )
-          :
-          null}
+          ) : null}
         </div>
       </React.Fragment>
     );

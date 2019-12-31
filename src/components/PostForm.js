@@ -22,7 +22,7 @@ class PostForm extends Component {
             profileName={this.props.profileName}
           />
           <br></br>
-          <Button type="submit"> Yes </Button>
+          <Button onClick={this.props.patchProfile} type="submit"> Yes </Button>
         </div>
       </form>
     );

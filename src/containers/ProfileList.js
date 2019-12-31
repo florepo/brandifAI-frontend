@@ -7,7 +7,9 @@ const ProfileList = ({
   selectProfile,
   deselectProfile,
   selectedProfile,
-  handleConfirm
+  handleConfirm,
+  patchProfile,
+  setPatchID
 }) => {
   return (
     <div className="backdrop">
@@ -27,7 +29,11 @@ const ProfileList = ({
           />
         )
       )}
-      <AddModal handleConfirm={handleConfirm} />
+      <AddModal
+        setPatchID={setPatchID}
+        handleConfirm={handleConfirm}
+        patchProfile={patchProfile}
+      />
     </div>
   );
 };
