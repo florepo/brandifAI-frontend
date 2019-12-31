@@ -5,7 +5,6 @@ import {Button} from "semantic-ui-react"
 
 const PostForm = props => {
 
-
   const handleSubmit = event => {
     event.preventDefault()
     console.log("click")

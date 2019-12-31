@@ -88,7 +88,7 @@ class SearchBox extends React.Component {
 
     fetch(API, configObj)
       .then(resp => resp.json())
-      .then(console.log);
+      //.then(console.log);
   };
 
   // JSX for render
