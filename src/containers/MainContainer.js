@@ -26,7 +26,8 @@ export class MainContainer extends Component {
     this.state = {
       profiles: [],
       selectedProfile: null,
-      selectedImage: null
+      selectedImage: null,
+      profileImgUrl: null
     };
   }
 
@@ -59,11 +60,16 @@ export class MainContainer extends Component {
     this.setState({ selectedProfile: null });
   };
 
+  handleConfirm = (image_url) => {
+    console.log("click");
+    this.setState({ profileImgUrl: image_url });
+  };
+
   //Render
 
   render() {
     const { profiles, selectedProfile, selectedImage } = this.state;
-    const { selectProfile, deselectProfile, selectImage, deselectImage } = this;
+    const { selectProfile, deselectProfile, selectImage, deselectImage, handleConfirm } = this;
     return (
       <React.Fragment>
         <ProfileList
@@ -71,6 +77,7 @@ export class MainContainer extends Component {
           deselectProfile={deselectProfile}
           profiles={profiles}
           selectedProfile={selectedProfile}
+          handleConfirm={handleConfirm}
           // hadn down funciton here
         />
         <div style={{ backgroundColor: "#F2F2F2", padding: "10px" }}>
