@@ -80,9 +80,9 @@ export class MainContainer extends Component {
     this.setState({ selectedProfile: null });
   };
 
-  handleConfirm = image_url => {
+  handleConfirm = obj => {
     console.log("click");
-    this.setState({ profileImgUrl: image_url });
+    this.setState({ profileImgUrl: obj.image });
   };
 
   //Render
