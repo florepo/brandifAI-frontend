@@ -73,7 +73,6 @@ class SearchBox extends React.Component {
 
   postNewProfile = e => {
     e.preventDefault();
-    console.log("posyNewProfile");
 
     const data = this.state.searchInput;
 
@@ -88,7 +87,7 @@ class SearchBox extends React.Component {
 
     fetch(API, configObj)
       .then(resp => resp.json())
-      //.then(console.log);
+      .then(console.log);
   };
 
   // JSX for render

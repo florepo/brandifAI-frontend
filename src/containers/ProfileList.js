@@ -1,6 +1,7 @@
 import React from "react";
 import ProfileIcon from "../components/ProfileIcon";
 import AddModal from "../components/AddModal"
+import Scraper from "../components/Scraper"
 
 const ProfileList = ({
   profiles,
@@ -30,6 +31,8 @@ const ProfileList = ({
           )
         )}
         <AddModal/>
+        <Scraper
+        />
       
     </div>
   );
