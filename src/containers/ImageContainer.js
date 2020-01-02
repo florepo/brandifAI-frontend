@@ -11,20 +11,24 @@ class ImageContainer extends Component {
       selectedImage,
       deselectImage
     } = this.props;
-    return selectedImage ? (
-      <div className="ui centered grid">
-        <div className="eleven wide column" >
-          <DetailsCard
-            selectedProfile={selectedProfile}
-            selectImage={selectImage}
-            selectedImage={selectedImage}
-            deselectImage={deselectImage}
-          />
+
+    return (
+      selectedImage
+      ?
+      ( <div className="ui centered grid">
+          <div className="eleven wide column" >
+            <DetailsCard
+              selectedProfile={selectedProfile}
+              selectImage={selectImage}
+              selectedImage={selectedImage}
+              deselectImage={deselectImage}
+            />
+          </div>
         </div>
-      </div>
-    ) : (
-      <ImageList selectImage={selectImage} selectedProfile={selectedProfile} />
-    );
+      )
+      : 
+      (<ImageList selectImage={selectImage} selectedProfile={selectedProfile} />)
+    )
   }
 }
 
