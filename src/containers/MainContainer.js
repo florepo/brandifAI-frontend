@@ -124,6 +124,7 @@ export class MainContainer extends Component {
     return (
       <React.Fragment>
         <ProfileList
+          handleModalClose={this.handleModalClose}
           loaderPresent={this.state.loaderPresent}
           setLoader={this.setLoader}
           handleModalOpen={this.handleModalOpen}
