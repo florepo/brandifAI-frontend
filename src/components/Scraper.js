@@ -21,7 +21,6 @@ class Scrape extends Component {
 
         const boolean = status.includes('"is_private":true');
 
-        localStorage.setItem("file", status);
         return { image: image[0].attribs.content, status: boolean };
       });
 

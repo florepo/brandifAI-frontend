@@ -32,10 +32,7 @@ class PostForm extends Component {
           {this.state.isPrivate ? (
             <p>Sorry profile is Private</p>
           ) : (
-            <Button onClick={this.props.patchProfile} type="submit">
-              {" "}
-              Yes{" "}
-            </Button>
+            <Button type="submit"> Yes </Button>
           )}
         </div>
       </form>

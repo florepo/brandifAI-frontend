@@ -87,8 +87,12 @@ class SearchBox extends React.Component {
 
     fetch(API, configObj)
       .then(resp => resp.json())
-      .then(console.log)
-      // .then(json => this.props.setPatchID(json.id))
+      .then(id => this.props.patchProfile(id))
+      .then(
+        this.setState({
+          confirmationModalOpen: false
+        })
+      );
   };
 
   // JSX for render
@@ -101,7 +105,14 @@ class SearchBox extends React.Component {
         open={this.state.confirmationModalOpen}
         onClose={this.handleSecondModalClose}
         header="Is this the correct instagram profile?"
-        content={<PostForm patchProfile={this.props.patchProfile} handleConfirm={this.props.handleConfirm} handleSubmit={this.postNewProfile} profileName={this.state.searchInput}/>}
+        content={
+          <PostForm
+            patchProfile={this.props.patchProfile}
+            handleConfirm={this.props.handleConfirm}
+            handleSubmit={this.postNewProfile}
+            profileName={this.state.searchInput}
+          />
+        }
         actions={[{ key: "done", content: "Done", positive: true }]}
       />
     );

@@ -12,8 +12,7 @@ export class MainContainer extends Component {
       profiles: [],
       selectedProfile: null,
       selectedImage: null,
-      profileImgUrl: null,
-      patchID: null
+      profileImgUrl: null
     };
   }
 
@@ -37,26 +36,25 @@ export class MainContainer extends Component {
 
   //Helpers
 
-  setPatchID = id => {
-    console.log(id)
-    // this.setState({
-    //   patchID: id
-    // });
-  };
+  patchProfile = id => {
+    const data = { icon_url: this.state.profileImgUrl };
 
-  patchProfile = () => {
-    // const data = this.state.profileImgUrl;
+    const configObj = {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    };
 
-    // const configObj = {
-    //   method: "PATCH",
-    //   headers: {
-    //     "content-type": "application/json",
-    //     accept: "application/json"
-    //   },
-    //   body: JSON.stringify(data)
-    // };
-
-    // fetch(API, configObj);
+    fetch(API + id, configObj)
+      .then(resp => resp.json())
+      .then(profile => {
+        this.setState({
+          profiles: [...this.state.profiles, profile]
+        });
+      });
   };
 
   selectImage = image => {
@@ -108,7 +106,6 @@ export class MainContainer extends Component {
           profiles={profiles}
           selectedProfile={selectedProfile}
           handleConfirm={handleConfirm}
-          // hadn down funciton here
         />
         <div style={{ backgroundColor: "#F2F2F2", padding: "10px" }}>
           {selectedProfile ? (
