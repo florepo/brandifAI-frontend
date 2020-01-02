@@ -92,7 +92,8 @@ class SearchBox extends React.Component {
         this.setState({
           confirmationModalOpen: false
         })
-      );
+      )
+      .then(this.props.setLoader());
   };
 
   // JSX for render

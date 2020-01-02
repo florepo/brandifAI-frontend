@@ -12,7 +12,9 @@ export class MainContainer extends Component {
       profiles: [],
       selectedProfile: null,
       selectedImage: null,
-      profileImgUrl: null
+      profileImgUrl: null,
+      modalOpen: false,
+      loaderPresent: false
     };
   }
 
@@ -54,8 +56,32 @@ export class MainContainer extends Component {
         this.setState({
           profiles: [...this.state.profiles, profile]
         });
-      });
+      })
+      .then(this.closeModal);
   };
+
+  setLoader = () => {
+    this.setState({ loaderPresent: true });
+  };
+
+  //modal
+
+  closeModal = () => {
+    this.setState({
+      modalOpen: false,
+      loaderPresent: false
+    });
+  };
+
+  handleModalClose = () => {
+    this.setState({ modalOpen: false });
+  };
+
+  handleModalOpen = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  //
 
   selectImage = image => {
     this.setState({ selectedImage: image });
@@ -93,13 +119,15 @@ export class MainContainer extends Component {
       selectImage,
       deselectImage,
       handleConfirm,
-      patchProfile,
-      setPatchID
+      patchProfile
     } = this;
     return (
       <React.Fragment>
         <ProfileList
-          setPatchID={setPatchID}
+          loaderPresent={this.state.loaderPresent}
+          setLoader={this.setLoader}
+          handleModalOpen={this.handleModalOpen}
+          modalOpen={this.state.modalOpen}
           patchProfile={patchProfile}
           selectProfile={selectProfile}
           deselectProfile={deselectProfile}

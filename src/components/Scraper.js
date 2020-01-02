@@ -34,7 +34,7 @@ class Scrape extends Component {
         this.props.handleConfirm(obj);
         return obj;
       })
-      .then(obj => this.props.getBoolean(obj));
+      .then(obj => this.props.getBoolean(obj))
   }
 
   render() {

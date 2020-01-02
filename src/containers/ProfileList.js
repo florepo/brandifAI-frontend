@@ -9,7 +9,11 @@ const ProfileList = ({
   selectedProfile,
   handleConfirm,
   patchProfile,
-  setPatchID
+  modalOpen,
+  handleModalClose,
+  handleModalOpen,
+  setLoader,
+  loaderPresent
 }) => {
   return (
     <div className="backdrop">
@@ -30,7 +34,11 @@ const ProfileList = ({
         )
       )}
       <AddModal
-        setPatchID={setPatchID}
+        loaderPresent={loaderPresent}
+        setLoader={setLoader}
+        handleModalOpen={handleModalOpen}
+        handleModalClose={handleModalClose}
+        modalOpen={modalOpen}
         handleConfirm={handleConfirm}
         patchProfile={patchProfile}
       />
