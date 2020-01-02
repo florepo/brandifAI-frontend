@@ -58,7 +58,6 @@ class SearchBox extends React.Component {
               errorContent: "Instagram username does not exist"
             });
           } else {
-            console.log("success");
             this.setState({
               selectedProfile: searchInput,
               invalidSearch: false,

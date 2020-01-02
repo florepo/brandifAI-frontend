@@ -106,7 +106,6 @@ export class MainContainer extends Component {
   };
 
   handleConfirm = obj => {
-    console.log("click");
     this.setState({ profileImgUrl: obj.image });
   };
 
