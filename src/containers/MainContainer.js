@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ProfileList from "./ProfileList";
 import ImageContainer from "./ImageContainer";
+import ProfileStats from "./ProfileStats"
 import { API } from "../adapters/api";
 
 // Class
@@ -139,6 +140,10 @@ export class MainContainer extends Component {
         <div style={{ backgroundColor: "#F2F2F2", padding: "10px" }}>
           {selectedProfile ? (
             <React.Fragment>
+              <br></br>
+              <ProfileStats 
+                selectedProfile={selectedProfile}
+              />
               <br></br>
               <ImageContainer
                 selectedImage={selectedImage}
