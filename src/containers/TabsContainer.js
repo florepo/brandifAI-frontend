@@ -22,10 +22,10 @@ const TabContainer = props => {
 
   const panes = [
     {
-      menuItem: "Brand Analysis",
+      menuItem: "Stats Chart",
       render: () => (
         <Tab.Pane>
-          Brand stuff
+          <ApexChart labels={labels} data={data} />
         </Tab.Pane>
       )
     },
@@ -38,8 +38,8 @@ const TabContainer = props => {
       )
     },
     {
-      menuItem: "Stats Chart",
-      render: () => <Tab.Pane><ApexChart labels={labels} data={data} /></Tab.Pane>
+      menuItem: "Brand Analysis",
+      render: () => <Tab.Pane>Brand analysis - In development!</Tab.Pane>
     }
   ];
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProfileList from "./ProfileList";
 import ImageContainer from "./ImageContainer";
-import ProfileStats from "./ProfileStats"
+import ProfileStats from "./ProfileStats";
 import { API } from "../adapters/api";
 
 // Class
@@ -109,6 +109,24 @@ export class MainContainer extends Component {
     this.setState({ profileImgUrl: obj.image });
   };
 
+  removeProfile = (profile) => {
+    const profileArray = [...this.state.profiles]
+    const fileredArray = profileArray.filter(el => el.id !== profile.id)
+    // console.log(profileArray)
+    // console.log(fileredArray)
+    this.setState({
+      profiles: fileredArray
+    })
+
+    const configObj = {
+      method: "DELETE"
+    }
+
+    fetch(API+profile.id, configObj)
+    .then(resp => resp.json())
+    .then(console.log)
+  }
+
   //Render
 
   render() {
@@ -119,11 +137,13 @@ export class MainContainer extends Component {
       selectImage,
       deselectImage,
       handleConfirm,
-      patchProfile
+      patchProfile,
+      removeProfile
     } = this;
     return (
       <React.Fragment>
         <ProfileList
+          removeProfile={removeProfile}
           handleModalClose={this.handleModalClose}
           loaderPresent={this.state.loaderPresent}
           setLoader={this.setLoader}
@@ -140,9 +160,7 @@ export class MainContainer extends Component {
           {selectedProfile ? (
             <React.Fragment>
               <br></br>
-              <ProfileStats 
-                selectedProfile={selectedProfile}
-              />
+              <ProfileStats selectedProfile={selectedProfile} />
               <br></br>
               <ImageContainer
                 selectedImage={selectedImage}

@@ -13,20 +13,23 @@ const ProfileList = ({
   handleModalClose,
   handleModalOpen,
   setLoader,
-  loaderPresent
+  loaderPresent,
+  removeProfile
 }) => {
   return (
-    <div className="backdrop">
+    <div className="backdrop" >
       <p>Instagram Profiles Analyzed: </p>
       {profiles.map(profile =>
         profile === selectedProfile ? (
           <ProfileIcon
+            removeProfile={removeProfile}
             key={profile.id}
             clickHandler={deselectProfile}
             profile={profile}
           />
         ) : (
           <ProfileIcon
+            removeProfile={removeProfile}
             key={profile.id}
             clickHandler={selectProfile}
             profile={profile}
