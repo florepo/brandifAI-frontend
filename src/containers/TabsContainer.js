@@ -2,6 +2,7 @@ import React from "react";
 import { Tab } from "semantic-ui-react";
 import WordCloud from "../components/WordCloud";
 import ApexChart from "../components/Graph";
+import Theme from "../components/Theme";
 
 const TabContainer = props => {
   // const wordList= [{text: "hello", value: 4},{text: "yo", value: 2},{text: "goodmorn", value: 10},{text: "pie", value: 1}]
@@ -38,8 +39,16 @@ const TabContainer = props => {
       )
     },
     {
-      menuItem: "Brand Analysis",
-      render: () => <Tab.Pane>Brand analysis - In development!</Tab.Pane>
+      menuItem: "Brand Analysis [BETA]",
+      render: () => (
+        <Tab.Pane>
+          <h2>This profile's brand suggestions are:</h2>
+          {props.suggestions.map(suggestion => (
+            <Theme suggestion={suggestion} />
+          ))}
+          <h6>Powered by Parallel Dots AI</h6>
+        </Tab.Pane>
+      )
     }
   ];
 
