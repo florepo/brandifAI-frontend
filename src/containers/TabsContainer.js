@@ -44,7 +44,7 @@ const TabContainer = props => {
         <Tab.Pane>
           <h2>This profile's brand suggestions are:</h2>
           {props.suggestions.map(suggestion => (
-            <Theme suggestion={suggestion} />
+            <Theme key={suggestion.tag} suggestion={suggestion} />
           ))}
           <h6>Powered by Parallel Dots AI</h6>
         </Tab.Pane>
