@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Loader } from "semantic-ui-react";
+import { Modal, Loader, Dimmer } from "semantic-ui-react";
 import SearchBox from "./SearchBox";
 
 class AddModal extends Component {
@@ -18,7 +18,9 @@ class AddModal extends Component {
           header="Enter the username of the profile you would like to analyze"
           content={
             this.props.loaderPresent ? (
+              <Dimmer active>
               <Loader />
+              </Dimmer>
             ) : (
               <SearchBox
                 setLoader={this.props.setLoader}

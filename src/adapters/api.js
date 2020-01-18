@@ -1,3 +1,3 @@
-export const API = "http://localhost:3000/profiles/";
+export const API = "https://brandifai-backend.herokuapp.com/profiles";
 
-export const API_STATS = "http://localhost:3000/stats/";
+export const API_STATS = "https://brandifai-backend.herokuapp.com/stats";

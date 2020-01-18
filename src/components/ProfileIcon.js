@@ -1,7 +1,11 @@
 import React from "react";
-import { Image } from "semantic-ui-react";
+import { Image, Button } from "semantic-ui-react";
 
-const ProfileIcon = ({ profile, clickHandler }) => {
+const ProfileIcon = ({ profile, clickHandler, removeProfile }) => {
+  const removeHandler = profile => {
+    removeProfile(profile);
+  };
+
   return (
     <div style={{ display: "inline-block" }}>
       <div>{profile.username + " "}</div>
@@ -12,7 +16,9 @@ const ProfileIcon = ({ profile, clickHandler }) => {
         avatar
         size="tiny"
       />
-      
+      <br></br>
+      <br></br>
+      <Button onClick={() => removeHandler(profile)}>Remove</Button>
     </div>
   );
 };
