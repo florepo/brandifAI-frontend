@@ -58,7 +58,6 @@ class SearchBox extends React.Component {
               errorContent: "Instagram username does not exist"
             });
           } else {
-            console.log("success");
             this.setState({
               selectedProfile: searchInput,
               invalidSearch: false,
@@ -124,7 +123,7 @@ class SearchBox extends React.Component {
     const { handleChange, handleSubmit } = this;
 
     return (
-      <React.Fragment>
+        <React.Fragment>
         <form onSubmit={handleSubmit} style={{ padding: "10px" }}>
           <Input
             iconPosition="left"
@@ -140,7 +139,7 @@ class SearchBox extends React.Component {
           <Button type="submit">Submit</Button>
         </form>
         {invalidSearch ? <Message error>{errorContent}</Message> : null}
-      </React.Fragment>
+        </React.Fragment>
     );
   }
 
