@@ -40,7 +40,7 @@ jobs:
 
       - aws-s3/sync:
           from: ~/repo/build/
-          to: "s3://mod4-brandifai-frontend"
+          to: "s3://brandifai.net"
           arguments: |
             --acl public-read \
           overwrite: true
