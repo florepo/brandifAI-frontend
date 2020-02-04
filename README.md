@@ -1,68 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#  brandifAI
+[brandifAI](http://www.brandifai.net) 
 
-## Available Scripts
+Brandifai is an web app providing a brand-suggestion for your Instagram profile.
+It utilizes web scraping to derive the posted images of a choosen profile and uses image recognition and natural language procession apis to suggest the most common themes.
 
-In the project directory, you can run:
+## Key Features
 
-### `yarn start`
+1. Choose any public Instagram profile for analisys by supplying the Instagram profile name. The app will check if the profile exists and is public (only public profiles can be analysed)
+2. Application creates and presents image tags (including display of confidence interval) for posted images
+3. Application displays most common tags as a barchart and all derived image tags as a word cloud for quick reference
+4. Application uses the results of the image analysis (> type of tags and number of occurances) to derive and present a brand suggestion (theme) for the profile.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Motivation
+- We wanted to build a web app that is relevant to the user.
+- We were interested in exploring the utilizating of existing image recognition and natural language processing apis to provide but to provide a service with added value.
+- We aimed to incorporate and practise continous integeration and delivery methods during the creation of the app to bridge the gap between development of deployment.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Tech Stack
+- Front-end in React
+- Ruby on Rails API for the Back-end
+- Postgres as database
 
-### `yarn test`
+## Notes on used 3rd Party Libraries and APIs
+- The app utilizes the third-party api Clarifai for content analysis of the image posts (image tags)
+- Additionally, the app utilizes the third-party api paralleldots to identify the theme of the loaded images (profile brand suggestion)
+- Both services require registration and retrival of an api-key. In order to install the app the respective keys need to be requested and saved in the credential files in Rails.
+- Instagram profile pictures are scrape utilizing cheerio (front-end, profile search verification) and Nokogiri and Instrammer (back-end, retrival of posted Instagram images)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Deployment
+- Front-end deployed to AWS S3 with Continous Deployment Pipeline from Github using CircleCi
+- Back-end deployed to Heruko with Heroku's Continous Deployment to Heroku from Github
 
-### `yarn build`
+## Addtional Deployment Notes (Heroku)
+- Do to the use of credentials to store the secret API keys (Paralleldots and Clarifai) the Rails app master key needs to be provided as an environmental variable in the Heruko admin panel.
+!! Never store any keys in plain text in a git repo !!
+- Use of Instagrammer gem requires the additional installation of the following buildpacks via the Heruko admin panel:
+   - heruko-buildpack-chromedriver.git
+   - heruko-buildpack-google-chrome.git
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Comments and Outlook
+- The current version of the app is a prove of concept and set to scrape the first 20 images of the profile to demonstrate the capabilities, this setting can be adjusted in the code base for personal use cases
+- Saved Instagram image urls are set to expire after certain time period, consequently older saved profiles might need to be refreshed (deleted and reloaded into the app), if images are fail to display.
+- The accuracy of the theme sugegstions is based on the capabilities of the Paralleldots api, and currently included all images tags regardless of their confidence interval.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## License
+MIT © @alexsh / @flow1981
