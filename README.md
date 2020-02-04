@@ -4,7 +4,7 @@
 Brandifai is an web app providing a brand-suggestion for your Instagram profile.
 It utilizes web scraping to derive the posted images of a choosen profile and uses image recognition and natural language procession apis to suggest the most common themes.
 
-![Image of Landing Page](https://imgur.com/uztSDIT.png)
+![Image of Landing Page](https://i.imgur.com/SNzvsQP.png)
 
 
 ## Key Features
@@ -16,7 +16,7 @@ It utilizes web scraping to derive the posted images of a choosen profile and us
 
 ![Image of Word Cloud](https://i.imgur.com/fGiQIjY.png)
 
-![Image of Brand Suggestion](https://i.imgur.com/Vh685nr.png)
+![Image of Brand Suggestion](https://imgur.com/uztSDIT.png)
 
 ## Motivation
 - We wanted to build a web app that is relevant to the user.
