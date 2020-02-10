@@ -7,7 +7,7 @@ class ApexChart extends React.Component {
 
     this.state = {
       series: [
-        {
+        { name: "Top 10 tags",
           data: []
         }
       ],
@@ -31,7 +31,7 @@ class ApexChart extends React.Component {
     };
   }
   setParams = () => {
-    const series = [{ data: this.props.data.slice(0, 10) }];
+    const series = [{ name: "Top 10 tags", data: this.props.data.slice(0, 10) }];
     const categories = this.props.labels.slice(0, 10);
     this.setState({
       series: series,
