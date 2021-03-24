@@ -1,5 +1,4 @@
 #  brandifAI
-[Live: www.brandifai.net](http://www.brandifai.net) 
 
 Brandifai is an web app providing a brand-suggestion for your Instagram profile.
 It utilizes web scraping to derive the posted images of a choosen profile and uses image recognition and natural language procession apis to suggest the most common themes.
