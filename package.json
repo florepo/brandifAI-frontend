@@ -7,7 +7,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "apexcharts": "^3.12.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "cheerio": "^1.0.0-rc.3",
     "re-resizable": "^6.1.1",
     "react": "^16.12.0",
